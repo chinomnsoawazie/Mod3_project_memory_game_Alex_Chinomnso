@@ -55,7 +55,8 @@ function createLevel(level){
     // create 'level * level" no of objects
     desiredObjects = level * 10;
     evaluateStatus = true;
-    matchProfile = {};
+    matchProfile.color = "";
+    matchProfile.shape = "";
 
 
   if (level < 3) { 
