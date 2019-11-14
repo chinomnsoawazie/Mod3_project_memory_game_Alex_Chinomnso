@@ -18,16 +18,21 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.new(user_params)
-        respond_to do |format|
-            if @user.save
-                format.html { redirect_to @user, notice: 'User successfully created.'}
-                format.json {render :show, status: :created, location: @user}
-            else
-                format.html {render :new}
-                format.json {render json: @user.erros, status: :unprocessable_entity}
-            end
-        end
+        @user = User.create(user_params)
+        if @user.valid?
+            render json: @user, status: 201
+        else 
+            render json: {errors: @user.errors.full_messages}, status: 401
+        end 
+        # respond_to do |format|
+        #     if @user.save
+        #         format.html { redirect_to @user, notice: 'User successfully created.'}
+        #         format.json {render :show, status: :created, location: @user}
+        #     else
+        #         format.html {render :new}
+        #         format.json {render json: @user.errors, status: :unprocessable_entity}
+        #     end
+        # end
     end
 
     

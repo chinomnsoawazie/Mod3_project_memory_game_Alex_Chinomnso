@@ -18,16 +18,21 @@ class GamesController < ApplicationController
 
     # POST/games.json
     def create
-        @game = Game.new(game_params)
-        respond_to do |format|
-            if @game.save
-                format.html {redirect_to, notice: 'Game was succesfully created'}
-                format.json {render :show, status: :created, location: @game}
-            else
-                format.html {render :new}
-                format.json {render json: @game.errors, status: :unprocessable_entity}
-            end
-        end
+        @game = Game.create(game_params)
+        if @game.valid?
+            render json: @game, status: 201
+        else 
+            render json: {errors: @game.errors.full_messages}, status: 401
+        end 
+        # respond_to do |format|
+            # if @game.save
+            #     format.html {redirect_to, notice: 'Game was succesfully created'}
+            #     format.json {render :show, status: :created, location: @game}
+            # else
+            #     format.html {render :new}
+            #     format.json {render json: @game.errors, status: :unprocessable_entity}
+            # end
+        # end
     end
 
     # PATCH/toys/1.json
@@ -50,6 +55,6 @@ class GamesController < ApplicationController
     end
 
     def game_params
-        params.require(:game).permit(:points, :level, :winstatus)
+        params.require(:game).permit(:points, :level, :winstatus, :user_id)
     end
 end
