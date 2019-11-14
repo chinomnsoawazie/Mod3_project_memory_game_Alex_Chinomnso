@@ -28,46 +28,46 @@ function buildSignInForm(){
     let signInForm = document.createElement('form');
     signInForm.id = "sign-in-form";
 
-let usernameField = document.createElement('input');
-usernameField.id = "username-field";
-usernameField.type = "text";
-usernameField.name = "username";
-usernameField.placeholder = "username..."
+    let usernameField = document.createElement('input');
+    usernameField.id = "username-field";
+    usernameField.type = "text";
+    usernameField.name = "username";
+    usernameField.placeholder = "username..."
 
-let passwordField = document.createElement('input');
-passwordField.id = "password-field"
-passwordField.type = "password";
-passwordField.name = "password";
-passwordField.placeholder = "password..."
+    let passwordField = document.createElement('input');
+    passwordField.id = "password-field"
+    passwordField.type = "password";
+    passwordField.name = "password";
+    passwordField.placeholder = "password..."
 
-let loginButton = document.createElement('input');
-loginButton.type = 'submit';
-loginButton.value = "submit";
-loginButton.className = "button";
-loginButton.style['background-color'] = 'Transparent';
-loginButton.style['font-family'] = 'Pixel Square';
-loginButton.style['color'] = 'rgb(0, 255, 0)';
-loginButton.style['border-color'] = 'rgb(0, 255, 0)';
+    let loginButton = document.createElement('input');
+    loginButton.type = 'submit';
+    loginButton.value = "submit";
+    loginButton.className = "button";
+    loginButton.style['background-color'] = 'Transparent';
+    loginButton.style['font-family'] = 'Pixel Square';
+    loginButton.style['color'] = 'rgb(0, 255, 0)';
+    loginButton.style['border-color'] = 'rgb(0, 255, 0)';
 
-let backButton = document.createElement('button');
-backButton.innerText = "back";
-backButton.className = "button";
-backButton.style['background-color'] = 'Transparent';
-backButton.style['font-family'] = 'Pixel Square';
-backButton.style['color'] = 'rgb(0, 255, 0)';
-backButton.style['border-color'] = 'rgb(0, 255, 0)';
-backButton.addEventListener('click', () => {
-    sphereAudio.play();
-    buildControlsDiv();;
+    let backButton = document.createElement('button');
+    backButton.innerText = "back";
+    backButton.className = "button";
+    backButton.style['background-color'] = 'Transparent';
+    backButton.style['font-family'] = 'Pixel Square';
+    backButton.style['color'] = 'rgb(0, 255, 0)';
+    backButton.style['border-color'] = 'rgb(0, 255, 0)';
+    backButton.addEventListener('click', () => {
+        sphereAudio.play();
+        buildControlsDiv();;
 
-})
-signInForm.appendChild(usernameField)
-signInForm.appendChild(passwordField)
-signInForm.appendChild(loginButton)
-signInForm.appendChild(backButton)
+    })
+    signInForm.appendChild(usernameField)
+    signInForm.appendChild(passwordField)
+    signInForm.appendChild(loginButton)
+    signInForm.appendChild(backButton)
 
- controlsDiv.innerHTML = "";
- controlsDiv.appendChild(signInForm);
+    controlsDiv.innerHTML = "";
+    controlsDiv.appendChild(signInForm);
 }
 
 let controlsDiv = document.getElementById("controls-div");
@@ -93,10 +93,35 @@ newUserBtn.addEventListener('click', () => {
     let newUserForm = document.querySelector("#sign-in-form");
     newUserForm.addEventListener('submit', (e) => {
         e.preventDefault()
-        //the method here should be post to Users table
+        let usernameFromForm = e.target.children.username.value
+        let passwordFromForm = e.target.children.password.value
+       return fetch('http://[::1]:3000/users', {
+           method: 'POST',
+           headers: {
+               "content-type": "application/json"
+           },
+           body: JSON.stringify({
+               username: usernameFromForm,
+               password: passwordFromForm
+           })
+       })
+        .then(r => r.json())
+        .then(user => {
+            // debugger
+            sphereAudio.play();
+            controlsDiv.innerHTML = "";
+            createExitButton()
+            currentUser = user
+            slider.material.dispose();
+            slider.geometry.dispose();
+            scene.remove(slider);
+            createLevel(level)
+        })
     })
     
 })
+
+
 
 controlsDiv.appendChild(newUserBtn)
 controlsDiv.appendChild(divider)
@@ -117,6 +142,34 @@ returningUserBtn.addEventListener('click', () => {
     returningUserForm.addEventListener('submit', (e) => {
         //the method here should be GET to Users table
         e.preventDefault()
+        let usernameFromForm = e.target.children.username.value
+        let passwordFromForm = e.target.children.password.value
+        currentUser = usersArray.find(userObj => userObj.username === usernameFromForm)
+        
+        
+        if (currentUser === undefined){ // we need to control for undefined otherwise we get an error
+            // send "Username or Password incorrect please retry or create an account" to the level display element
+            // at the same time, render the new user or returnning user panel
+            pointsDisplay.innerText = "username or password incorrect, please try again"
+
+        } else {
+            if ((usernameFromForm === currentUser.username) && ((passwordFromForm === currentUser.password))){
+                sphereAudio.play();
+                controlsDiv.innerHTML = "";
+                createExitButton()
+                slider.material.dispose();
+                slider.geometry.dispose();
+                scene.remove(slider);
+                setLevel(currentUser.id)
+                createLevel(level)
+            } else {
+                pointsDisplay.innerText = "username or password incorrect, please try again"
+            }
+
+        }
+        console.log(usernameFromForm)
+        console.log(passwordFromForm)
+        
 
     })
 

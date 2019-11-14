@@ -27,6 +27,7 @@ function randomColor() {
 }
 
 function checkWin(){
+  let gamePoints = points - totalPointsFromLastGame
 
   let winStatues;
     if (points >= level * 10){      
@@ -38,6 +39,23 @@ function checkWin(){
     if (evaluateStatus === false) {
       createContinueMenu(winStatues);
     }
+
+    fetch('http://[::1]:3000/games', {
+      method: 'POST',
+      headers: {
+          "content-type": "application/json"
+      },
+      body: JSON.stringify({
+          points: gamePoints,
+          level: level,
+          winstatus: winStatues,
+          user_id: currentUser.id
+      })
+  })
+  .then(r => r.json())
+  .then(game => {
+    console.log(game)
+  })
 }
 
 //create random color
@@ -57,6 +75,8 @@ function createLevel(level){
     evaluateStatus = true;
     matchProfile.color = "";
     matchProfile.shape = "";
+    findMyPoints(currentUser.id)
+    pointsDisplay.innerText = `${points} points`
 
 
   if (level < 3) { 
