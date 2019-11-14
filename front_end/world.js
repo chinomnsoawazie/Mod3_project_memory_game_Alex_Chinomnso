@@ -80,7 +80,6 @@ function implementDragging(){
  } );
 }
 
-// createLevel(level)
 
 //create animations
 const animate = () => {
