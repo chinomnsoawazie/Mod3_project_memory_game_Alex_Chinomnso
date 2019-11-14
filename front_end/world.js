@@ -1,4 +1,3 @@
-//declare variables
 //level variable is declared in level_logic.js
 let shapes = ['cone', 'sphere', 'cube']
 let sliderArray = []
@@ -14,6 +13,9 @@ let usersArray;
 let currentUser;
 let totalPointsFromLastGame;
 let matchProfile = {}
+let randomInterval;
+let explicitInterval;
+let jackyInterval;
 
 function createScene(){
   scene = new THREE.Scene();
@@ -31,11 +33,11 @@ function createScene(){
     camera.aspect = window.innerWidth, window.innerHeight;
    })
 
-//add stars
-//    let times = 500;
-//     for(var i=0; i < times; i++){
-//     createBackground();
-//    }
+// add stars
+   let times = 300;
+    for(var i=0; i < times; i++){
+    createBackground();
+   }
 //add lighting
    spotLight = new THREE.SpotLight( 0xFFFFFF, 2);
    spotLight.position.set( 200, 250, 600 );
@@ -43,24 +45,18 @@ function createScene(){
    spotLight.castShadow = true;
    scene.add( spotLight.target );
    scene.add( spotLight );
-//Set up shadow properties for the spotLight
-   spotLight.shadow.mapSize.width = 512; // default
-   spotLight.shadow.mapSize.height = 512; // default
-   spotLight.shadow.camera.near = 0.5; // default
-   spotLight.shadow.camera.far = 15000; // default
-
-   //zoom camera out
+   spotLight.shadow.mapSize.width = 512;
+   spotLight.shadow.mapSize.height = 512;
+   spotLight.shadow.camera.near = 0.5;
+   spotLight.shadow.camera.far = 15000;
    camera.position.z = 20;
 }
 
 createScene();
 
 function createSlider(color, shape){
-// create shape
-
-createObject(color, shape, true)
+ createObject(color, shape, true)
  slider.position.y = -12;
-//  scene.add( slider );
  sliderArray = [];
  sliderArray.push(slider)
 
@@ -68,7 +64,6 @@ createObject(color, shape, true)
 }
 createSlider(matchProfile.color, matchProfile.shape)
 
-//Implement Dragging
 function implementDragging(){
  var controls = new THREE.DragControls( sliderArray, camera, renderer.domElement );
  controls.addEventListener( 'dragstart', function ( event ) {
@@ -76,37 +71,21 @@ function implementDragging(){
  } );
  controls.addEventListener( 'dragend', function ( event ) {
    event.object.material.emissive.set( 0x000000 );
-  //  console.log(slider)
  } );
 }
-
-// createLevel(level)
 
 //create animations
 const animate = () => {
     requestAnimationFrame(animate)
     slider.rotation.x += 0.01
     slider.rotation.y += 0.01
-    // slider.position.y -= 0.06
     renderer.render( scene, camera );
 }
 
 animate();
 
-
-//game logic
-
-//draw scene
-var render = function () {
-    renderer.render(scene,camera);
-}
-
-let randomInterval;
-let explicitInterval;
-let jackyInterval;
 function toggleGenerateObjects(){
-    generatingObjects = !generatingObjects; 
-
+    generatingObjects = !generatingObjects;
     let myColor = matchProfile.color
     let myShape = matchProfile.shape
 
@@ -127,10 +106,8 @@ function toggleGenerateObjects(){
 }
 
 function createObject(color, shape, isSlider){
-
  let shapeToGenerate = shape
  let colorToGenerate = color
-//if shape is not specified, we randomize shape
  if (shapeToGenerate === undefined) {
   shapeToGenerate = getRandomShape();
  }
@@ -139,7 +116,6 @@ function createObject(color, shape, isSlider){
    colorToGenerate = randomColor();
  }
 
- //if color is undefined, these functions take in an argument of "undefined" and randomize color internally
   if (shapeToGenerate === 'cone') {
    createCone(color, isSlider);
   } else if (shapeToGenerate === 'sphere') {
@@ -160,33 +136,3 @@ function userFetch(){
    usersArray = returnedUsersArray
   })
 }
-
-// function setLevel(userId){
-//   fetch('http://[::1]:3000/games')
-//   .then(r => r.json())
-//   .then(allGames => {
-//     let myGames = allGames.filter(x => x.user_id === userId)
-//     if (myGames.length > 0){
-//      level = myGames[myGames.length - 1].level
-//     } else {
-//       level = 1
-//     }
-//   })
-// }
-
-// function findMyPoints(userId){
-//   fetch('http://[::1]:3000/games')
-//   .then(r => r.json())
-//   .then(allGames => {
-//     var myGames = allGames.filter(x => x.user_id === userId)
-//     var myTotal = 0;
-//     myGames.forEach(game => {
-//       // debugger
-//       myTotal += game.points
-//     });
-//    points = myTotal
-//    totalPointsFromLastGame = points
-//   })
-// }
-
-

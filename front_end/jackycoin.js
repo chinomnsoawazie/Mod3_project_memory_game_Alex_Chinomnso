@@ -52,6 +52,5 @@ function createJackieCoin(){
   }
 }
 
-animate();
-
+ animate();
 }

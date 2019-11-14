@@ -1,11 +1,6 @@
-
 let pointsDisplay = document.getElementById("points-display");
 let points = 0;
-// pointsDisplay.innerText = `${points} points`
-
 let matchDisplay = document.getElementById("match-display") 
-// matchShape = "sphere"
-// matchColor = "purple"
 
 function determineMatchProfile(matchColor, matchShape) {
     let myColor = matchColor
@@ -21,8 +16,6 @@ function determineMatchProfile(matchColor, matchShape) {
 matchProfile = {shape: myShape, color: myColor}
 matchDisplay.innerText = `hit all the ${matchProfile.color} ${matchProfile.shape}s`
 }
-//hardcoding, for now
-// determineMatchProfile(matchColor, matchShape);
 
 function buildSignInForm(){
     let signInForm = document.createElement('form');
@@ -59,13 +52,11 @@ function buildSignInForm(){
     backButton.addEventListener('click', () => {
         sphereAudio.play();
         buildControlsDiv();;
-
     })
     signInForm.appendChild(usernameField)
     signInForm.appendChild(passwordField)
     signInForm.appendChild(loginButton)
     signInForm.appendChild(backButton)
-
     controlsDiv.innerHTML = "";
     controlsDiv.appendChild(signInForm);
 }
@@ -107,23 +98,18 @@ newUserBtn.addEventListener('click', () => {
        })
         .then(r => r.json())
         .then(user => {
-            // debugger
             sphereAudio.play();
             controlsDiv.innerHTML = "";
             createExitButton()
             currentUser = user
             setLevel(currentUser.id)
-            // setLevel(currentUser.id)
             slider.material.dispose();
             slider.geometry.dispose();
             scene.remove(slider);
             createLevel(level)
         })
-    })
-    
+    }) 
 })
-
-
 
 controlsDiv.appendChild(newUserBtn)
 controlsDiv.appendChild(divider)
@@ -142,16 +128,12 @@ returningUserBtn.addEventListener('click', () => {
     buildSignInForm();
     let returningUserForm = document.querySelector("#sign-in-form");
     returningUserForm.addEventListener('submit', (e) => {
-        //the method here should be GET to Users table
         e.preventDefault()
         let usernameFromForm = e.target.children.username.value
         let passwordFromForm = e.target.children.password.value
         currentUser = usersArray.find(userObj => userObj.username === usernameFromForm)
         
-        
-        if (currentUser === undefined){ // we need to control for undefined otherwise we get an error
-            // send "Username or Password incorrect please retry or create an account" to the level display element
-            // at the same time, render the new user or returnning user panel
+        if (currentUser === undefined){ 
             pointsDisplay.innerText = "username or password incorrect, please try again"
 
         } else {
@@ -167,14 +149,8 @@ returningUserBtn.addEventListener('click', () => {
             } else {
                 pointsDisplay.innerText = "username or password incorrect, please try again"
             }
-
         }
-        console.log(usernameFromForm)
-        console.log(passwordFromForm)
-        
-
     })
-
 })
 
 controlsDiv.appendChild(returningUserBtn)
@@ -202,22 +178,14 @@ function createContinueMenu(winOrLose){
         e.preventDefault()
         level += 1
         desiredObjects = level * 5;
-        // console.log(level)
         slider.material.dispose();
         slider.geometry.dispose();
         scene.remove(slider)
-        // levelDispay.innerText = `level ${level}`
-        // controlsDiv.innerHTML = "";
         createExitButton();
-        // setLevel(currentUser.id)
-        createLevel(level)
-        console.log(level)
-
+        createLevel(level);
     })
     controlsDiv.appendChild(continueButton)
-
     createExitButton();
-
 }
 
 function createExitButton(){
@@ -235,7 +203,6 @@ function createExitButton(){
         e.preventDefault();
         sphereAudio.play();
         location.reload();
-
     })
     controlsDiv.appendChild(exitButton)
 }
