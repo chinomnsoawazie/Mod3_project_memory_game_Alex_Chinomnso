@@ -76,7 +76,7 @@ function implementDragging(){
  } );
  controls.addEventListener( 'dragend', function ( event ) {
    event.object.material.emissive.set( 0x000000 );
-   console.log(slider)
+  //  console.log(slider)
  } );
 }
 
@@ -161,32 +161,32 @@ function userFetch(){
   })
 }
 
-function setLevel(userId){
-  fetch('http://[::1]:3000/games')
-  .then(r => r.json())
-  .then(allGames => {
-    let myGames = allGames.filter(x => x.user_id === userId)
-    if (myGames.length > 0){
-     level = myGames[myGames.length - 1]
-    } else {
-      level = 1
-    }
-  })
-}
+// function setLevel(userId){
+//   fetch('http://[::1]:3000/games')
+//   .then(r => r.json())
+//   .then(allGames => {
+//     let myGames = allGames.filter(x => x.user_id === userId)
+//     if (myGames.length > 0){
+//      level = myGames[myGames.length - 1].level
+//     } else {
+//       level = 1
+//     }
+//   })
+// }
 
-function findMyPoints(userId){
-  fetch('http://[::1]:3000/games')
-  .then(r => r.json())
-  .then(allGames => {
-    var myGames = allGames.filter(x => x.user_id === userId)
-    var myTotal = 0;
-    myGames.forEach(game => {
-      // debugger
-      myTotal += game.points
-    });
-   points = myTotal
-   totalPointsFromLastGame = points
-  })
-}
+// function findMyPoints(userId){
+//   fetch('http://[::1]:3000/games')
+//   .then(r => r.json())
+//   .then(allGames => {
+//     var myGames = allGames.filter(x => x.user_id === userId)
+//     var myTotal = 0;
+//     myGames.forEach(game => {
+//       // debugger
+//       myTotal += game.points
+//     });
+//    points = myTotal
+//    totalPointsFromLastGame = points
+//   })
+// }
 
 

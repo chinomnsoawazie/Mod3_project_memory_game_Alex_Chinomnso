@@ -1,7 +1,7 @@
 
 let pointsDisplay = document.getElementById("points-display");
 let points = 0;
-pointsDisplay.innerText = `${points} points`
+// pointsDisplay.innerText = `${points} points`
 
 let matchDisplay = document.getElementById("match-display") 
 // matchShape = "sphere"
@@ -112,6 +112,8 @@ newUserBtn.addEventListener('click', () => {
             controlsDiv.innerHTML = "";
             createExitButton()
             currentUser = user
+            setLevel(currentUser.id)
+            // setLevel(currentUser.id)
             slider.material.dispose();
             slider.geometry.dispose();
             scene.remove(slider);
@@ -156,7 +158,7 @@ returningUserBtn.addEventListener('click', () => {
             if ((usernameFromForm === currentUser.username) && ((passwordFromForm === currentUser.password))){
                 sphereAudio.play();
                 controlsDiv.innerHTML = "";
-                createExitButton()
+                createExitButton();
                 slider.material.dispose();
                 slider.geometry.dispose();
                 scene.remove(slider);
@@ -199,13 +201,15 @@ function createContinueMenu(winOrLose){
      sphereAudio.play();
         e.preventDefault()
         level += 1
-        console.log(level)
+        desiredObjects = level * 5;
+        // console.log(level)
         slider.material.dispose();
         slider.geometry.dispose();
         scene.remove(slider)
-        levelDispay.innerText = `level ${level}`
-        controlsDiv.innerHTML = "";
+        // levelDispay.innerText = `level ${level}`
+        // controlsDiv.innerHTML = "";
         createExitButton();
+        // setLevel(currentUser.id)
         createLevel(level)
         console.log(level)
 
