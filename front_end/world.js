@@ -180,7 +180,6 @@ function findMyPoints(userId){
     var myGames = allGames.filter(x => x.user_id === userId)
     var myTotal = 0;
     myGames.forEach(game => {
-      // debugger
       myTotal += game.points
     });
    points = myTotal
