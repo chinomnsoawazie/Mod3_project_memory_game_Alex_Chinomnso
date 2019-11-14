@@ -1,0 +1,19 @@
+body { 
+       margin: 0;
+       height: 100vh; 
+       width: 100vh;
+       background-color: black;
+       border: none;
+    }
+
+
+canvas { display: block;
+          border: none;
+          width: 80%;
+          align-content: right;
+          padding: 0px;
+}
+
+html {
+    overflow-x: hidden;
+    }
