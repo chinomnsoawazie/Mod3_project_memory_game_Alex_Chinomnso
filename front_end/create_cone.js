@@ -24,6 +24,7 @@ function createCone(color, isSlider){
     newCone.userData.type = "cone"
     
     //check color
+  if (isSlider === undefined){
     if (matchProfile.color === ""){
         newCone.userData.colorMatch = true;
     } else if (matchProfile.color === myColor) {
@@ -45,14 +46,17 @@ function createCone(color, isSlider){
     } else {
         newCone.userData.pointsValue = -10;
     }
-    
     scene.add( newCone );
+  }
+    
     var coneObject = scene.getObjectByName( newCone.name );
     let af;
 
     if (isSlider === true){
         slider = newCone
-        slider.position.x = -12
+        scene.add(slider)
+        slider.position.y = -12
+        slider.position.x = 0
     }
 
     if (isSlider === undefined){ //if its NOT a slider, we animate it

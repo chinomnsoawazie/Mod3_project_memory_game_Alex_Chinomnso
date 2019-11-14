@@ -22,6 +22,7 @@ function createCube(color, isSlider){
     newCube.userData.type = "cube"
 
     //check color
+   if (isSlider === undefined){
     if (matchProfile.color === ""){
         newCube.userData.colorMatch = true;
     } else if (matchProfile.color === myColor) {
@@ -43,13 +44,16 @@ function createCube(color, isSlider){
     } else {
         newCube.userData.pointsValue = -10;
     }
-
     scene.add( newCube );
-    var cubeObject = scene.getObjectByName( newCube.name );
+  }
 
-    if (isSlider === true){
-        slider = newCube
-        slider.position.x = -12
+  var cubeObject = scene.getObjectByName( newCube.name );
+  
+  if (isSlider === true){
+      slider = newCube
+      scene.add( slider );
+        slider.position.y = -12
+        slider.position.x = 0
     }
  
     let af;

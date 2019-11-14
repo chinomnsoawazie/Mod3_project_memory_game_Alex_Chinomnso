@@ -25,6 +25,7 @@ function createSphere(color, isSlider){
     newSphere.userData.type = "sphere"
 
     //check color
+  if (isSlider === undefined){
     if (matchProfile.color === ""){
         newSphere.userData.colorMatch = true;
     } else if (matchProfile.color === myColor) {
@@ -46,8 +47,9 @@ function createSphere(color, isSlider){
     } else {
         newSphere.userData.pointsValue = -10;
     }
-
     scene.add( newSphere );
+ }
+
     var sphereObject = scene.getObjectByName( newSphere.name );
     // console.log(sphereObject.position)
 
@@ -55,7 +57,9 @@ function createSphere(color, isSlider){
 
     if (isSlider === true){ //the slider becomes the object
         slider = newSphere
-        slider.position.x = -12
+        scene.add( slider );
+        slider.position.y = -12
+        slider.position.x = 0
     }
 
    if (isSlider === undefined){

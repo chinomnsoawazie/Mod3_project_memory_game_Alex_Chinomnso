@@ -53,7 +53,7 @@ function randomColor(){
 
 function createLevel(level){
     // create 'level * level" no of objects
-    desiredObjects = level * 10;
+    desiredObjects = level * 5;
     evaluateStatus = true;
     matchProfile.color = "";
     matchProfile.shape = "";
@@ -68,7 +68,7 @@ function createLevel(level){
     toggleGenerateObjects();
 
     //create a slider that matches the matching shape with random color
-    // determineSliderShapeAndColor(matchProfile.shape, randomColor())
+    createSlider(undefined, matchProfile.shape)
   } else if (level < 6)
   {
     //determine color to match
@@ -78,7 +78,7 @@ function createLevel(level){
     toggleGenerateObjects();
 
     //create slider with random shape and matching color
-    // determineSliderShapeAndColor(getRandomShape(), matchProfile.color)
+    createSlider(matchProfile.color, undefined)
   } else {
     //match by shape and color
     matchProfile.color = randomColor();
@@ -89,7 +89,7 @@ function createLevel(level){
     toggleGenerateObjects();
 
     //create slider that matches shape and color
-    // determineSliderShapeAndColor(matchProfile.shape, matchProfile.color)
+    createSlider(matchProfile.color, matchProfile.shape)
   }
 
 }

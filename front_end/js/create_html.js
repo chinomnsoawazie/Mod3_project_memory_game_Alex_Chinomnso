@@ -147,6 +147,9 @@ function createContinueMenu(winOrLose){
         e.preventDefault()
         level += 1
         console.log(level)
+        slider.material.dispose();
+        slider.geometry.dispose();
+        scene.remove(slider)
         levelDispay.innerText = `level ${level}`
         controlsDiv.innerHTML = "";
         createExitButton();

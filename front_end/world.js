@@ -52,20 +52,18 @@ function createScene(){
 
 createScene();
 
-function createSlider(){
+function createSlider(color, shape){
 // create shape
- var geometry = new THREE.SphereGeometry( 2, 32, 32 );
-// create material, color, or image texture
 
- var material = new THREE.MeshPhongMaterial ( {color: "purple", wireframe: false} );
- slider = new THREE.Mesh( geometry, material );
+createObject(color, shape, true)
  slider.position.y = -12;
- scene.add( slider );
+//  scene.add( slider );
+ sliderArray = [];
  sliderArray.push(slider)
 
  implementDragging()
 }
-createSlider()
+createSlider(matchProfile.color, matchProfile.shape)
 
 //Implement Dragging
 function implementDragging(){
@@ -125,21 +123,26 @@ function toggleGenerateObjects(){
     }
 }
 
-function createObject(color, shape){
+function createObject(color, shape, isSlider){
 
  let shapeToGenerate = shape
+ let colorToGenerate = color
 //if shape is not specified, we randomize shape
  if (shapeToGenerate === undefined) {
   shapeToGenerate = getRandomShape();
  }
 
+ if (colorToGenerate === undefined) {
+   colorToGenerate = randomColor();
+ }
+
  //if color is undefined, these functions take in an argument of "undefined" and randomize color internally
   if (shapeToGenerate === 'cone') {
-   createCone(color);
+   createCone(color, isSlider);
   } else if (shapeToGenerate === 'sphere') {
-   createSphere(color);
+   createSphere(color, isSlider);
   } else if (shapeToGenerate === 'cube') {
-   createCube(color);
+   createCube(color, isSlider);
   }
 }
 
