@@ -16,6 +16,7 @@ let matchProfile = {}
 let randomInterval;
 let explicitInterval;
 let jackyInterval;
+createScene();
 
 function createScene(){
   scene = new THREE.Scene();
@@ -23,15 +24,7 @@ function createScene(){
   renderer = new THREE.WebGLRenderer({antialias: true});
    renderer.setClearColor("#000000");
    renderer.setSize(window.innerWidth, window.innerHeight);
-   canvasDiv = document.getElementById("game-canvas")
    canvasDiv.appendChild(renderer.domElement);
-
-   window.addEventListener('resize', (e) => {
-    console.log(main)
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.updateProjectionMatrix();
-    camera.aspect = window.innerWidth, window.innerHeight;
-   })
 
 // add stars
    let times = 300;
@@ -50,9 +43,18 @@ function createScene(){
    spotLight.shadow.camera.near = 0.5;
    spotLight.shadow.camera.far = 15000;
    camera.position.z = 20;
+
+   window.addEventListener('resize', onWindowResize, false);
+
 }
 
-createScene();
+function onWindowResize() {
+  
+  // console.log(canvasDiv)
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
 
 function createSlider(color, shape){
  createObject(color, shape, true)

@@ -51,7 +51,6 @@ function randomColor() {
        evaluateStatus = false;
         toggleGenerateObjects();
         checkWin();
-        console.log('game over');
     }
 }
 
