@@ -122,12 +122,6 @@ THREE.DragControls = function ( _objects, _camera, _domElement ) {
 
 			_selected = intersects[ 0 ].object;
 
-			if ( _raycaster.ray.intersectPlane( _plane, _intersection ) ) {
-
-				_inverseMatrix.getInverse( _selected.parent.matrixWorld );
-				_offset.copy( _intersection ).sub( _worldPosition.setFromMatrixPosition( _selected.matrixWorld ) );
-
-			}
 
 			_domElement.style.cursor = 'move';
 
