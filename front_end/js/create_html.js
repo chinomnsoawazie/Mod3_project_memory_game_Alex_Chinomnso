@@ -218,6 +218,8 @@ function createIntro(){
  <ul> 
  <li>Nobody likes losers. In other words, losers SHALL be made to lose more, so if you lose at a level, you lose a level. <br> Yes, you can deep into bankruptcy. Good news however is that you can claw your way out of that hole. How's that for an encouragement young padawan?</li>
  <br>
+ <li>To win, you must score 10 times whatever level you're on: 10 on level 1, 20 on level 2, and so on. This will be added to your total score.</li>
+ <br>
 <li>You are provided a freebie points bounty card. Put in the work and figure it out.</li>
 <br>
 <li>You have instructions on what to pop at each level to your right. <br> Let's see how well you learnt how to listen to instructions from your mama</li> 
