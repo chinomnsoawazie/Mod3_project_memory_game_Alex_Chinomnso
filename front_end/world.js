@@ -138,3 +138,32 @@ function userFetch(){
    usersArray = returnedUsersArray
   })
 }
+
+function setLevel(userId){
+  fetch('http://[::1]:3000/games')
+  .then(r => r.json())
+  .then(allGames => {
+    let myGames = allGames.filter(x => x.user_id === userId)
+    if (myGames.length > 0){
+     level = myGames[myGames.length - 1]
+    } else {
+      level = 1
+    }
+  })
+}
+
+function findMyPoints(userId){
+  fetch('http://[::1]:3000/games')
+  .then(r => r.json())
+  .then(allGames => {
+    var myGames = allGames.filter(x => x.user_id === userId)
+    var myTotal = 0;
+    myGames.forEach(game => {
+      myTotal += game.points
+    });
+   points = myTotal
+   totalPointsFromLastGame = points
+  })
+}
+
+
