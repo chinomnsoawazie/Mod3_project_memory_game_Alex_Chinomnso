@@ -26,9 +26,20 @@ function createBackground(){
 
 function animate() {
     requestAnimationFrame(animate)     
-    mesh.rotation.y += 0.00006;
-    mesh.rotation.x += 0.00006;
+    mesh.rotation.y += 0.06;
+    mesh.rotation.x += 0.06;
 }
  animate();
 }
 
+function createSkybox(){
+    var geometry = new THREE.CubeGeometry(1000, 1000, 1000)
+    var cubeMaterials = new THREE.MeshPhongMaterial( {color: "black", side: THREE.DoubleSide } );
+    var skybox = new THREE.Mesh( geometry, cubeMaterials );
+    skybox.userData.name = "skybox"
+    skybox.position.z = camera.position.z
+    console.log(skybox.material.envMap)
+    // skybox.material.envMap = 'reflection' 
+    scene.add( skybox );
+
+}

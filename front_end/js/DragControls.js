@@ -122,12 +122,6 @@ THREE.DragControls = function ( _objects, _camera, _domElement ) {
 
 			_selected = intersects[ 0 ].object;
 
-			if ( _raycaster.ray.intersectPlane( _plane, _intersection ) ) {
-
-				_inverseMatrix.getInverse( _selected.parent.matrixWorld );
-				_offset.copy( _intersection ).sub( _worldPosition.setFromMatrixPosition( _selected.matrixWorld ) );
-
-			}
 
 			_domElement.style.cursor = 'move';
 
@@ -208,13 +202,10 @@ THREE.DragControls = function ( _objects, _camera, _domElement ) {
 				_offset.copy( _intersection ).sub( _worldPosition.setFromMatrixPosition( _selected.matrixWorld ) );
 
 			}
-
 			_domElement.style.cursor = 'move';
-
 			scope.dispatchEvent( { type: 'dragstart', object: _selected } );
 
 		}
-
 
 	}
 
@@ -225,7 +216,6 @@ THREE.DragControls = function ( _objects, _camera, _domElement ) {
 		if ( _selected ) {
 
 			scope.dispatchEvent( { type: 'dragend', object: _selected } );
-
 			_selected = null;
 
 		}
@@ -239,7 +229,6 @@ THREE.DragControls = function ( _objects, _camera, _domElement ) {
 	// API
 
 	this.enabled = true;
-
 	this.activate = activate;
 	this.deactivate = deactivate;
 	this.dispose = dispose;

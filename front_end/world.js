@@ -26,15 +26,9 @@ function createScene(){
    canvasDiv = document.getElementById("game-canvas")
    canvasDiv.appendChild(renderer.domElement);
 
-   window.addEventListener('resize', (e) => {
-    console.log(main)
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.updateProjectionMatrix();
-    camera.aspect = window.innerWidth, window.innerHeight;
-   })
 
 // add stars
-   let times = 300;
+   let times = 200;
     for(var i=0; i < times; i++){
     createBackground();
    }
@@ -50,7 +44,20 @@ function createScene(){
    spotLight.shadow.camera.near = 0.5;
    spotLight.shadow.camera.far = 15000;
    camera.position.z = 20;
+
+
+   window.addEventListener('resize', onWindowResize, false); 
+    
 }
+
+function onWindowResize(){
+
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+}
+  
 
 createScene();
 
@@ -104,6 +111,7 @@ function toggleGenerateObjects(){
      clearInterval(randomInterval);
     }
 }
+createSkybox()
 
 function createObject(color, shape, isSlider){
  let shapeToGenerate = shape
@@ -136,3 +144,4 @@ function userFetch(){
    usersArray = returnedUsersArray
   })
 }
+createIntro()

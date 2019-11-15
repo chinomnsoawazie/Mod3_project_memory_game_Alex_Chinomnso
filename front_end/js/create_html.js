@@ -79,6 +79,7 @@ newUserBtn.style['color'] = 'rgb(0, 255, 0)';
 newUserBtn.style['border-color'] = 'rgb(0, 255, 0)';
 
 newUserBtn.addEventListener('click', () => {
+    destroyIntro()
     sphereAudio.play();
     buildSignInForm();
     let newUserForm = document.querySelector("#sign-in-form");
@@ -124,6 +125,7 @@ returningUserBtn.style['color'] = 'rgb(0, 255, 0)';
 returningUserBtn.style['border-color'] = 'rgb(0, 255, 0)';
 
 returningUserBtn.addEventListener('click', () => {
+    destroyIntro()
     sphereAudio.play();
     buildSignInForm();
     let returningUserForm = document.querySelector("#sign-in-form");
@@ -205,4 +207,24 @@ function createExitButton(){
         location.reload();
     })
     controlsDiv.appendChild(exitButton)
+}
+
+let introDisplay;
+function createIntro(){
+ introDisplay = document.createElement('div')
+ introDisplay.id = "intstructions"
+ introDisplay.innerHTML = `<h2 style="text-align: center"> Welcome to ShapesBlaster</h2> <br>
+ <h3 style="text-align: center">Instructions</h3> 
+ <ul> 
+ <li>Nobody likes losers. In other words, losers SHALL be made to lose more, so if you lose at a level, you lose a level. <br> Yes, you can deep into bankruptcy. Good news however is that you can claw your way out of that hole. How's that for an encouragement young padawan?</li>
+ <br>
+<li>You are provided a freebie points bounty card. Put in the work and figure it out.</li>
+<br>
+<li>You have instructions on what to pop at each level to your right. <br> Let's see how well you learnt how to listen to instructions from your mama</li> 
+</ul>`
+ document.body.appendChild(introDisplay)
+}
+
+function destroyIntro(){
+    introDisplay.remove();
 }
