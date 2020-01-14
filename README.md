@@ -13,6 +13,17 @@ Welcome to Shape Buster, the game where you test your ability to remember instru
 - Hit the wrong objects and you will lose points
 - The falling face cards are worth 50 bonus points!
 
+### How to Test
+
+- To run this beta version on your machine...
+  1. Clone this repository
+  2. cd into the backend/ folder and run any necessary Rails migrations (backend was created with PostgreSQL)
+    * rails db:create
+    * rails db:migrate 
+    * rails s
+  3. Go back to the root directory (cd ..) and then cd into the front_end folder
+  4. Open index.html in your web browser
+
 ### Glossary
 * Canvas: HTML element used to draw graphics on a web page; used to render 3D shapes with Three.js
 * Scene: The "world" rendered by Three.js inside of the canvas; includes booth seen and unseen items (for example, items that are behind the camera)
@@ -22,6 +33,7 @@ Welcome to Shape Buster, the game where you test your ability to remember instru
 * Ruby on Rails
 * Three.js
 * JavaScript
+* PostgreSQL
 * CSS
 
 ## Project Description

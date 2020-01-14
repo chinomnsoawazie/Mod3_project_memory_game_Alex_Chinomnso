@@ -33,7 +33,7 @@ function createScene(){
     createBackground();
    }
 //add lighting
-   spotLight = new THREE.SpotLight( 0xf41fff, 2);
+   spotLight = new THREE.SpotLight( 0xf9cfff, 2);
    spotLight.position.set( 200, 250, 600 );
    spotLight.target.position.set( 100, -50, 0 );
    spotLight.castShadow = true;
