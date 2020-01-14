@@ -63,6 +63,9 @@ function createSphere(color, isSlider){
     }
 
    if (isSlider === undefined){
+
+
+    
     const animate = () => {
         af = requestAnimationFrame(animate)
  
